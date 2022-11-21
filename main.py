@@ -79,7 +79,7 @@ class MiVentana(window_name, base_class):
                         self.dataframe[current] = np.random.permutation(self.dataframe[current].values)
                         print(self.dataframe[current])
 
-                    if option == 'Pseudoanonimizacion':
+                    if option == 'Seudoanonimizacion':
                         def hash_name(string):
                             m = hashlib.md5(string.encode('utf-8'))
                             return str(uuid.UUID(m.hexdigest()))
