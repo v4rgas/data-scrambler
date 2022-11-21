@@ -1,4 +1,8 @@
 import sys
+
+import hashlib
+import uuid
+import random
 import numpy as np
 import pandas as pd
 from PyQt5.QtWidgets import QWidget, QApplication, QFileDialog, QLabel, QVBoxLayout
@@ -71,14 +75,20 @@ class MiVentana(window_name, base_class):
                 current = item.colnames.currentText()
                 option = item.options.currentText()
                 if current:
-                    if option == 'Swapping':
+                    if option == 'Barajar':
                         self.dataframe[current] = np.random.permutation(self.dataframe[current].values)
                         print(self.dataframe[current])
 
-                    if option == 'Pseudonymization':
-                        self.dataframe[current] = self.dataframe[current].apply(hash)
+                    if option == 'Pseudoanonimizacion':
+                        def hash_name(string):
+                            m = hashlib.md5(string.encode('utf-8'))
+                            return str(uuid.UUID(m.hexdigest()))
+                        self.dataframe[current] = self.dataframe[current].apply(hash_name)
 
-                    if option == 'Masking':
+                    if option == 'Enmascaramiento':
+                        self.dataframe[current] = self.dataframe[current].apply(lambda x: ''.join(random.sample(x, len(x))).lower())
+
+                    if option == 'Suprimir':
                         self.dataframe[current] = self.dataframe[current].apply(lambda x: '*')
 
         self.dataframe.to_excel('modified.xlsx',index=False)

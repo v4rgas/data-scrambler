@@ -44,17 +44,22 @@
       </item>
       <item>
        <property name="text">
-        <string>Pseudonymization</string>
+        <string>Pseudoanonimizacion</string>
        </property>
       </item>
       <item>
        <property name="text">
-        <string>Swapping</string>
+        <string>Barajar</string>
        </property>
       </item>
       <item>
        <property name="text">
-        <string>Masking</string>
+        <string>Enmascaramiento</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Suprimir</string>
        </property>
       </item>
      </widget>
