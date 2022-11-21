@@ -5,11 +5,21 @@ import uuid
 import random
 import numpy as np
 import pandas as pd
+import os
 from PyQt5.QtWidgets import QWidget, QApplication, QFileDialog, QLabel, QVBoxLayout
 from PyQt5 import uic
 
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
 
-window_name, base_class = uic.loadUiType("./item.ui")
+    return os.path.join(base_path, relative_path)
+
+window_name, base_class = uic.loadUiType(resource_path("./item.ui"))
 
 
 class Item(window_name, base_class):
@@ -20,7 +30,7 @@ class Item(window_name, base_class):
         self.options = self.hbox.itemAt(1).widget()
 
 
-window_name, base_class = uic.loadUiType("./main.ui")
+window_name, base_class = uic.loadUiType(resource_path("./main.ui"))
 
 
 class MiVentana(window_name, base_class):
